@@ -1,16 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const sqlite3 = require('sqlite3').verbose(); // Removed for now
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
-const port = process.env.PORT || 3000; // Important for Render.com!
+const port = process.env.PORT || 3000;
+const votesFile = path.join(__dirname, 'votes.json');
 
 // Middleware
 app.use(bodyParser.json());
-
-// Serve static files from the public folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Make sure votes.json exists
+if (!fs.existsSync(votesFile)) {
+  fs.writeFileSync(votesFile, '[]');
+}
 
 // =======================
 // PAGES (Routes)
@@ -35,12 +39,31 @@ app.get('/vote', (req, res) => {
 // API Endpoints
 // =======================
 
-// Temporarily disable voting until DB is restored
+// Submit a vote
 app.post('/api/vote', (req, res) => {
-  return res.json({ success: false, message: 'Voting is currently disabled (no database).' });
+  const { username, password, party } = req.body;
+
+  if (!username || !password || !party) {
+    return res.json({ success: false, message: 'Missing fields.' });
+  }
+
+  // Read current votes
+  let votes = JSON.parse(fs.readFileSync(votesFile));
+
+  // Check if this user has already voted
+  const existingVote = votes.find(v => v.username === username);
+  if (existingVote) {
+    return res.json({ success: false, message: 'You have already voted.' });
+  }
+
+  // Add new vote
+  votes.push({ username, password, party });
+  fs.writeFileSync(votesFile, JSON.stringify(votes, null, 2));
+
+  res.json({ success: true });
 });
 
-// Start the server
+// Start server
 app.listen(port, () => {
   console.log(`✅ Server running at http://localhost:${port}`);
 });
