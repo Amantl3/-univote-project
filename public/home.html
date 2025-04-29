@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniVote - Home</title>
+
+  <link href="../UniVote/style.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="../UniVote/download.png" type="image/png">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding-top: 70px; /* to avoid content being hidden under navbar */
+    }
+    .navbar {
+      margin-bottom: 0;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background-color: #1877f2;
+      color: white;
+    }
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+    #candidates {
+      margin-top: 40px;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      border-radius: 10px 10px 0 0;
+      height: 250px;
+      object-fit: cover;
+    }
+    .btn-primary {
+      background-color: #1877f2;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #155db8;
+    }
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: gray;
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #fff;
+    }
+    footer a {
+      color: #1877f2;
+      text-decoration: none;
+    }
+    .admin-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .admin-button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="home.html">
+      <img id="logo" src="images/download.png" alt="Icon" class="d-inline-block align-top" style="height: 40px;">
+      UniVote
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home.html">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header>
+    <h1>Welcome to UniVote</h1>
+    <p>Your Vote, Your Voice, Your Future</p>
+  </header>
+
+  <!-- Candidates Section -->
+  <section id="candidates" class="container">
+    <h2 class="text-center my-4">Candidate Parties</h2>
+
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card p-3">
+          <img src="images/Moono-wa-baithuti.jpg" class="card-img-top" alt="Moono Wa Baithuti">
+          <div class="card-body text-center">
+            <h5 class="card-title font-weight-bold">Moono Wa Baithuti</h5>
+            <p class="card-text">A dedicated student political movement, echoing the voices of the distressed. Proud affiliate of UDC.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="card p-3">
+          <img src="images/rsl.jpg" class="card-img-top" alt="RSL">
+          <div class="card-body text-center">
+            <h5 class="card-title font-weight-bold">Revolutionary Student Leadership</h5>
+            <p class="card-text">RSL offers entertainment, sports, transparent leadership, and 100 jobs!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="vote.html" class="btn btn-primary btn-lg">Vote Now for a Change</a>
+    </div>
+  </section>
+
+  <!-- Admin Button -->
+  <div class="text-center mt-4">
+    <button class="admin-button" id="adminButton">Admin Login</button>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Contact us: <a href="mailto:abc23@thuto.bac.ac.bw">abc23@thuto.bac.ac.bw</a> |
+    Phone: <a href="tel:+26774963950">+267 74963950</a></p>
+    Created in 2025. All rights reserved.
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Admin Login Script -->
+  <script>
+    document.getElementById('adminButton').addEventListener('click', function() {
+      // Prompt for username and password
+      const username = prompt("Enter username:");
+      const password = prompt("Enter password:");
+
+      // Check if credentials are correct
+      if (username === 'admin123' && password === 'password1') {
+        // Redirect to admin results page
+        window.location.href = 'admin_results.html';
+      } else {
+        // Alert for incorrect credentials
+        alert("Incorrect username or password!");
+      }
+    });
+  </script>
+
+</body>
+</html>
+
