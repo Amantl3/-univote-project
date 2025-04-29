@@ -34,7 +34,7 @@ app.get('/vote', (req, res) => {
 
 
 
-const db = new sqlite3.Database('./votes.db');
+#const db = new sqlite3.Database('./votes.db');
 
 
 db.run(`
